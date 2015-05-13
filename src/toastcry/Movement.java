@@ -7,7 +7,7 @@ package toastcry;
 
 /**
  * Der Plan ist, dass man jedem Toast Movements hinzufügen kann, nach denen er sich bewegt
- * Diese Erben alle von dies Klasse
+ * Diese Erben alle von dieser Klasse
  * weiß nicht wie gut die Idee ist
  * @author Toast
  */
