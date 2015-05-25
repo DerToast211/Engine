@@ -15,6 +15,12 @@ public abstract class Movement {
     
     private double xMovement;
     private double yMovement;
+    
+    private Toast toast;
+    
+    public Movement(Toast toast){
+        this.toast = toast;
+    }
       
     /**
      * Führt dieses Movement für zwischen diesem Frame und dem nächsten aus (Hoffe ist klar was ich meine)
@@ -38,7 +44,5 @@ public abstract class Movement {
     public void setyMovement(double yMovement) {
         this.yMovement = yMovement;
     }
-    
-    
     
 }

@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import toastcry_input.KeyEinleser;
+import toastcry_input.KeysPressed;
 
 /**
  * Die Engine (Namen können wir noch ändern ^^) Lässt sich einem Fenster
@@ -20,12 +22,20 @@ import javax.swing.JLabel;
 public class ToastCry extends JLabel {
 
     private ArrayList<Toast> toasts; //Alle aktuellen Toast-Objekte, welche der Engine hinzugefügt wurden
+    
     public final int XSIZE;
     public final int YSIZE;
+    
+    private KeysPressed aktKeysPressed;
+    
 
     public ToastCry() {
         super();
+        
         toasts = new ArrayList();
+        
+        aktKeysPressed = new KeysPressed();
+        this.addKeyListener(new KeyEinleser(aktKeysPressed));
         //this.setSize(800, 600);
 
         //Egal was man probiert um die Hröße festzulegen, die Methode pack() verkleinert das Fenster später trotzdem auf ein ganz kleines Fenster
@@ -77,5 +87,11 @@ public class ToastCry extends JLabel {
 
         }
     }
+
+    public KeysPressed getAktKeysPressed() {
+        return aktKeysPressed;
+    }
+    
+    
 
 }

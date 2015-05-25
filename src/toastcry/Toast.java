@@ -93,6 +93,12 @@ public class Toast {
     public void setWelt(ToastCry welt) {
         this.welt = welt;
     }
+
+    public ToastCry getWelt() {
+        return welt;
+    }
+    
+    
     
     
     
@@ -103,16 +109,14 @@ public class Toast {
     /**
      * Dieser Toast wird als spielbarer Charackter festgelegt, indem ihm ein PlayerMovement hinzugefügt wird
      * Den Toast kann man mit den als Parameter angegebenen Tasten steuern
-     * Der KeyListener des PlayerMovementswird der Engine hinzugefügt
      * @param upKey
      * @param leftKey
      * @param downKey
      * @param rightKey
      */
     public void setPlayer(int upKey, int leftKey, int downKey, int rightKey){
-        PlayerMovement p = new PlayerMovement(upKey, leftKey, downKey, rightKey);
+        PlayerMovement p = new PlayerMovement(upKey, leftKey, downKey, rightKey, this);
         this.addMovement(p);
-        welt.addKeyListener(p.getGeber());
     }
 
     

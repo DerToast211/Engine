@@ -5,8 +5,8 @@
  */
 package toastcry;
 
-import toastcry_input.KeyGeber;
-import toastcry_input.KeyList;
+import toastcry_input.KeysPressed;
+import toastcry_input.KeyEinleser;
 
 /**
  * Wird Toasts hinzugefügt, welche mit der Tastatur kontrolliert werden sollen
@@ -14,9 +14,12 @@ import toastcry_input.KeyList;
  */
 public class PlayerMovement extends Movement {
     
-    KeyGeber geber; //Der Key-Listener für dieses Movement
-    //Wahrscheinlich ist es eine bessere Idee, wenn alle Toasts durch einen zentralen Key-Listener versorgt werden
-    //Dafür müsste man aber auch die Key-Klassen verändern
+    KeysPressed belegung;
+    
+    int upKey;
+    int leftKey;
+    int downKey;
+    int rightKey;
     
     /**
      * Erzeugt ein neues P
@@ -24,45 +27,54 @@ public class PlayerMovement extends Movement {
      * @param leftKey
      * @param downKey
      * @param rightKey
+     * @param t
      */
-    public PlayerMovement(int upKey, int leftKey, int downKey, int rightKey){
-        super();
-        this.geber = new KeyGeber(upKey, leftKey, downKey, rightKey);
+    public PlayerMovement(int upKey, int leftKey, int downKey, int rightKey, Toast t){
+        super(t);
+        this.belegung = t.getWelt().getAktKeysPressed();
+        
+        this.upKey = upKey;
+        belegung.addKey(upKey);
+        this.leftKey = leftKey;
+        belegung.addKey(leftKey);
+        this.downKey = downKey;
+        belegung.addKey(downKey);
+        this.rightKey = rightKey;
+        belegung.addKey(rightKey);
     }
     
-    public PlayerMovement(KeyGeber geber){
-        super();
-        this.geber = geber;
+    public PlayerMovement(KeysPressed belegung, Toast t){
+        super(t);
+        this.belegung = belegung;
     }
     
     @Override
     public void update(){
         
-        KeyList aktKeyList = geber.getAktKeyList();
         
-        if(aktKeyList.isUpPressed()){
+        if(belegung.keyPressed(upKey)){
             super.setyMovement(-5.0); //Speed sollte man natürlich auch angeben können
-        } 
+        }
         
-        if(aktKeyList.isLeftPressed()){
+        if(belegung.keyPressed(leftKey)){
             super.setxMovement(-5.0);
         } 
         
-        if(aktKeyList.isDownPressed()){
+        if(belegung.keyPressed(downKey)){
             super.setyMovement(5.0);
-        } else if(!aktKeyList.isUpPressed()) {
+        } else if(!belegung.keyPressed(upKey)) {
             super.setyMovement(0.0);
         }
         
-        if(aktKeyList.isRightPressed()){
+        if(belegung.keyPressed(rightKey)){
             super.setxMovement(5.0);
-        } else if (!aktKeyList.isLeftPressed()){
+        } else if (!belegung.keyPressed(leftKey)){
             super.setxMovement(0.0);
         }
     }
 
-    public KeyGeber getGeber() {
-        return geber;
+    public KeysPressed getGeber() {
+        return belegung;
     }
     
     

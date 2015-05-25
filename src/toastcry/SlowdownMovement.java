@@ -11,12 +11,10 @@ package toastcry;
  */
 public class SlowdownMovement extends Movement {
 
-    private Toast toast;
     private double slowdown;
 
     public SlowdownMovement(Toast t, double slowdown) {
-        super();
-        this.toast = t;
+        super(t);
         this.slowdown = slowdown;
 
     }

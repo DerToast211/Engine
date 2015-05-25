@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import toastcry.*;
-import toastcry_input.KeyGeber;
+import toastcry_input.KeysPressed;
 
 /**
  * Dient nur zum Testen der Engine, also alles hierdrin gehört nicht dazu
@@ -42,13 +42,14 @@ public class ToastCryTest {
         player2.setPlayer(KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT);
         //player.addMovement(new SlowdownMovement(player, 0.5));
         
+        
         while(true){
             toastcry.update();
         }
 
     }
     
-    public static void FensterErzeugen(){
+    public static void FensterErzeugen() throws InterruptedException{
         Fenster = new JFrame();
         Fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Fenster.setLayout(new BorderLayout());
@@ -76,7 +77,7 @@ public class ToastCryTest {
         
         Fenster.setVisible(true);
         toastcry.requestFocusInWindow(); //Die Engine braucht den Tastaturfokus, damit KeyListener auf ihr funktionieren
-        System.out.println(toastcry.hasFocus()); //Auch wenn sich die Grafiken bewegen lassen, wird hier immer false ausgegeben
+        toastcry.requestFocus();
     }
 
 }
